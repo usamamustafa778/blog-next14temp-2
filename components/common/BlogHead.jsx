@@ -6,7 +6,7 @@ const myFont = Cormorant({ subsets: ["cyrillic"] });
 
 export default function BlogHead({ title }) {
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-col items-center gap-4">
       <p className="italic text-xs w-fit text-center text-gray-400">
         in
         <span className="uppercase text-yellow-600 font-medium ml-2 text-xs">

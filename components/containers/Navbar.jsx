@@ -4,11 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Instagram, Search, Twitter } from "lucide-react";
 
-export default function Navbar({ menu_list }) {
+export default function Navbar() {
   return (
     <FullContainer className="bg-white shadow">
       <div className="hidden md:flex items-center  justify-center py-3 gap-6 w-full border-b border-gray-100">
-        <Link href={`/${"home"}`} className="uppercase text-sm">
+        <Link href="/" className="uppercase text-sm">
           home
         </Link>
         <Link href={`/${"about"}`} className="uppercase text-sm">

@@ -2,10 +2,14 @@ import React from "react";
 import BlogHead from "./BlogHead";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Blog({ title, image, className }) {
   return (
-    <div className={className}>
+    <Link
+      href={title?.toLowerCase().replaceAll(" ", "-")}
+      className={className}
+    >
       <BlogHead title={title} />
       <div className="relative overflow-hidden w-full h-[60vh] mt-8">
         <Image
@@ -29,6 +33,6 @@ export default function Blog({ title, image, className }) {
         wrote so stunningly this that much slew.
       </p>
       <Button className="mt-6">Read More</Button>
-    </div>
+    </Link>
   );
 }
