@@ -7,7 +7,7 @@ import { Facebook, Instagram, Search, Twitter } from "lucide-react";
 export default function Navbar({ menu_list }) {
   return (
     <FullContainer className="bg-white shadow">
-      <div className="hidden md:flex items-center  justify-center py-4 gap-6 w-full border-b border-gray-100">
+      <div className="hidden md:flex items-center  justify-center py-3 gap-6 w-full border-b border-gray-100">
         <Link href={`/${"home"}`} className="uppercase text-sm">
           home
         </Link>
@@ -32,7 +32,7 @@ export default function Navbar({ menu_list }) {
             width={170}
             src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/logo-main-img-01.png"
             alt="logo"
-            className="w-40 md:w-auto"
+            className="w-40 md:w-72"
           />
         </Link>
         <div className="flex items-center justify-end gap-3 text-gray-500">

@@ -15,15 +15,13 @@ export default function Footer() {
             <p className="font-bold">About</p>
             <div className="relative overflow-hidden w-full h-44 mt-5">
               <Image
-                src="https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2016/05/shutterstock_604112207-1024x683.jpg"
+                src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/user-img-1.png"
                 alt="Background Image"
-                priority={true}
-                fill={true}
-                loading="eager"
-                className="w-full h-full object-cover absolute top-0"
+                height={200}
+                width={200}
               />
             </div>
-            <p className="text-white/80 mt-4 text-sm">
+            <p className="text-white/90 mt-6 text-sm">
               Sed ut in perspiciatis unde omnis iste natus error sit on i tatem
               accusantium doloremque laudan totam rem aperiam eaque.
             </p>

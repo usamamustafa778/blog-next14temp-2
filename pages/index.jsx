@@ -9,42 +9,66 @@ import Image from "next/image";
 import { Facebook, Instagram, Search, Twitter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import Footer from "@/components/containers/Footer";
-import BlogHead from "@/components/common/BlogHead";
 import Blog from "@/components/common/Blog";
 
 const myFont = Montserrat({ subsets: ["cyrillic"] });
 
+const blogs = [
+  {
+    title: "A Look Inside The Work Abode",
+    image:
+      "https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2016/05/DSC2670-768x513.jpg",
+  },
+  {
+    title: "Best skincare routine for dry skin",
+    image:
+      "https://zoya.qodeinteractive.com/wp-content/uploads/2021/03/blog-img-8.jpg",
+  },
+  {
+    title: "Ten best recipes for a light dinner",
+    image:
+      "https://zoya.qodeinteractive.com/wp-content/uploads/2021/03/blog-img-10.jpg",
+  },
+  {
+    title: "Amazing dresses and gowns for prom",
+    image:
+      "https://zoya.qodeinteractive.com/wp-content/uploads/2021/03/blog-img-9.jpg",
+  },
+  {
+    title: "Ready for a getaway weekend",
+    image:
+      "https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/blog-img-1.jpg",
+  },
+  {
+    title: "Newly Wed And Blissful Start of New Life",
+    image:
+      "https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2016/05/shutterstock_604112207-1024x683.jpg",
+  },
+  {
+    title: "Latest Style Ideas For Men in Fashion",
+    image:
+      "https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2016/05/shutterstock_350435249-1024x1024.jpg",
+  },
+];
 export default function Home() {
   return (
     <div className={`min-h-screen ${myFont.className}`}>
       <Navbar />
       <Banner />
-      <MostPopular />
       <FullContainer>
-        <Container className="py-10">
-          <div className="grid grid-cols-1 md:grid-cols-home gap-12 w-full">
+        <Container className="py-16">
+          <div className="grid grid-cols-1 md:grid-cols-home gap-14 w-full">
             {/* Left Column */}
-            <div>
-              <Blog
-                title="A Look Inside The Work Abode"
-                image="https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2016/05/DSC2670-768x513.jpg"
-              />
-              <Blog
-                className="mt-16"
-                title="Newly Wed And Blissful Start of New Life"
-                image="https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2016/05/shutterstock_604112207-1024x683.jpg"
-              />
-              <Blog
-                className="mt-16"
-                title="Latest Style Ideas For Men in Fashion"
-                image="https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2016/05/shutterstock_350435249-1024x1024.jpg"
-              />
+            <div className="flex flex-col gap-20">
+              {blogs.map((item, index) => (
+                <Blog key={index} title={item.title} image={item.image} />
+              ))}
             </div>
 
             {/* Right Column */}
-            <div className="h-fit">
+            <div className="h-fit sticky top-0">
               <div className="relative cursor-pointer hover:opacity-90 transition-all">
-                <div className="relative overflow-hidden w-full h-96 mt-8">
+                <div className="relative overflow-hidden w-full h-96">
                   <Image
                     src="https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2016/05/shutterstock_437021746-1024x683.jpg"
                     alt="Background Image"
@@ -107,6 +131,7 @@ export default function Home() {
           </div>
         </Container>
       </FullContainer>
+      <MostPopular />
       <Footer />
     </div>
   );
