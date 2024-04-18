@@ -7,6 +7,7 @@ import Footer from "@/components/containers/Footer";
 import Blog from "@/components/common/Blog";
 import { blogs } from "@/components/blogs";
 import Rightbar from "@/components/containers/Rightbar";
+import Head from "next/head";
 import { Montserrat } from "next/font/google";
 
 const myFont = Montserrat({ subsets: ["cyrillic"] });
@@ -14,8 +15,14 @@ const myFont = Montserrat({ subsets: ["cyrillic"] });
 export default function Home() {
   return (
     <div className={myFont.className}>
+      <Head>
+        <title>Next 14 Template</title>
+      </Head>
       <Navbar />
-      <Banner />
+      <Banner
+        title="New Fashion Trends"
+        image="https://zoya.qodeinteractive.com/wp-content/uploads/2021/01/blog-list-img-5.jpg"
+      />
       <FullContainer>
         <Container className="py-16">
           <div className="grid grid-cols-1 md:grid-cols-home gap-14 w-full">
