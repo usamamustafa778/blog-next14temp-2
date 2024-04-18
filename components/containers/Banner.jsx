@@ -3,8 +3,8 @@ import FullContainer from "../common/FullContainer";
 import Container from "../common/Container";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
-import { Cormorant } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { Cormorant } from "next/font/google";
 
 const myFont = Cormorant({ subsets: ["cyrillic"] });
 
