@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "zoya.qodeinteractive.com",
       },
+      {
+        protocol: "https",
+        hostname: "apisitem.ecommcube.com",
+      },
     ],
   },
   reactStrictMode: true,

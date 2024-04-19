@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Instagram, Search, Twitter } from "lucide-react";
 
-export default function Navbar() {
+export default function Navbar({ logo }) {
   return (
     <>
       <div className="hidden md:flex items-center sticky top-0 bg-white z-20 shadow-sm justify-center py-3 gap-6 w-full border-b border-gray-100">
@@ -21,6 +21,7 @@ export default function Navbar() {
           blogs
         </Link>
       </div>
+
       <FullContainer className="bg-white shadow-sm">
         <div className="flex items-center justify-between w-10/12 py-10">
           <div className="flex items-center gap-3 uppercase">
@@ -31,7 +32,7 @@ export default function Navbar() {
             <Image
               height={50}
               width={170}
-              src="https://zoya.qodeinteractive.com/wp-content/uploads/2021/04/logo-main-img-01.png"
+              src={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/industry_template_images/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/${logo.file_name}`}
               alt="logo"
               className="w-40 md:w-72"
             />

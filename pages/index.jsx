@@ -12,26 +12,28 @@ import { Montserrat } from "next/font/google";
 
 const myFont = Montserrat({ subsets: ["cyrillic"] });
 
-export default function Home({ logo }) {
+export default function Home({ logo, banner }) {
   // http://localhost:3112/images/industry_template_images/65f031b9d1d7559cda393629/1710763764370-kpqe5g.jpeg
   // setBannerImage(
   //   `https://apisitem.ecommcube.com/images/industry_template_images/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/${file}`
   // );
-  console.log(logo);
+  console.log("banner", banner.value);
 
   return (
     <div className={myFont.className}>
       <Head>
         <title>Next 14 Template</title>
       </Head>
-      <Navbar />
+      <Navbar logo={logo} />
       <Banner
-        title="New Fashion Trends"
-        image="https://zoya.qodeinteractive.com/wp-content/uploads/2021/01/blog-list-img-5.jpg"
+        badge={banner.value.badge}
+        title={banner.value.title}
+        tagline={banner.value.tagline}
+        image={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/industry_template_images/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/${banner?.file_name}`}
       />
       <FullContainer>
         <Container className="py-16">
-          <div className="grid grid-cols-1 md:grid-cols-home gap-14 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-home gap-12 lg:gap-14 w-full">
             <div className="flex flex-col gap-20">
               {blogs.map((item, index) => (
                 <Blog key={index} title={item.title} image={item.image} />
@@ -48,30 +50,28 @@ export default function Home({ logo }) {
 }
 
 export async function getStaticProps() {
-  try {
-    const _logo = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_MANAGER}/public/industry_template_data/${
-        process.env.NEXT_PUBLIC_INDUSTRY_ID
-      }/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/data/${"Banner"}`
-    );
+  const _logo = await fetch(
+    `${
+      process.env.NEXT_PUBLIC_SITE_MANAGER
+    }/api/public/industry_template_data/${
+      process.env.NEXT_PUBLIC_INDUSTRY_ID
+    }/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/data/${"logo"}`
+  );
+  const logo = await _logo.json();
 
-    if (!_logo.ok) {
-      throw new Error(`Failed to fetch logo: ${_logo.statusText}`);
-    }
+  const _banner = await fetch(
+    `${
+      process.env.NEXT_PUBLIC_SITE_MANAGER
+    }/api/public/industry_template_data/${
+      process.env.NEXT_PUBLIC_INDUSTRY_ID
+    }/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/data/${"banner"}`
+  );
+  const banner = await _banner.json();
 
-    const logo = await _logo.json();
-
-    return {
-      props: {
-        logo,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching logo:", error);
-    return {
-      props: {
-        logo: null,
-      },
-    };
-  }
+  return {
+    props: {
+      logo: logo.data[0],
+      banner: banner.data[0],
+    },
+  };
 }

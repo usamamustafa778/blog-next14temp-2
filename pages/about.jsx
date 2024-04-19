@@ -8,14 +8,18 @@ import { Montserrat } from "next/font/google";
 import { Cormorant } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Rightbar from "@/components/containers/Rightbar";
+import Head from "next/head";
 
 const myFont = Montserrat({ subsets: ["cyrillic"] });
 const font2 = Cormorant({ subsets: ["cyrillic"] });
 
-export default function About() {
+export default function About({ logo }) {
   return (
     <div className={myFont.className}>
-      <Navbar />
+      <Head>
+        <title>Next 14 Template</title>
+      </Head>
+      <Navbar logo={logo} />
       <AboutBanner />
       <FullContainer>
         <Container className="py-16">
@@ -57,4 +61,21 @@ export default function About() {
       <Footer />
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const _logo = await fetch(
+    `${
+      process.env.NEXT_PUBLIC_SITE_MANAGER
+    }/api/public/industry_template_data/${
+      process.env.NEXT_PUBLIC_INDUSTRY_ID
+    }/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/data/${"logo"}`
+  );
+  const logo = await _logo.json();
+
+  return {
+    props: {
+      logo: logo.data[0],
+    },
+  };
 }

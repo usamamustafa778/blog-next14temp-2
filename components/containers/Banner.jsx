@@ -8,7 +8,7 @@ import { Cormorant } from "next/font/google";
 
 const myFont = Cormorant({ subsets: ["cyrillic"] });
 
-export default function Banner({ title, image }) {
+export default function Banner({ title, image, badge, tagline }) {
   return (
     <FullContainer className="h-[60vh] overflow-hidden p-10 bg-black/20 text-white text-center">
       <Image
@@ -20,7 +20,7 @@ export default function Banner({ title, image }) {
         className="-z-10 w-full h-full object-cover absolute top-0"
       />
       <Container className="gap-6">
-        <Badge>Fashion</Badge>
+        {badge && <Badge>{badge}</Badge>}
         <h1
           className={cn(
             "font-extrabold text-7xl capitalize max-w-screen-md",
@@ -29,10 +29,11 @@ export default function Banner({ title, image }) {
         >
           {title}
         </h1>
-        <div className="flex items-center justify-center gap-2">
-          <p>BY SHANE DOE</p>
-          <p>MAY 14, 2016</p>
-        </div>
+        {tagline && (
+          <div className="flex items-center justify-center gap-2">
+            <p>{tagline}</p>
+          </div>
+        )}
       </Container>
     </FullContainer>
   );

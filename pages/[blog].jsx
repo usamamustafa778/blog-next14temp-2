@@ -9,101 +9,32 @@ import Rightbar from "@/components/containers/Rightbar";
 import { useRouter } from "next/router";
 import { Montserrat } from "next/font/google";
 import Footer from "@/components/containers/Footer";
+import MarkdownIt from "markdown-it";
 
 const myFont = Montserrat({ subsets: ["cyrillic"] });
 
-export default function Blog() {
+export default function Blog({ logo, myblog }) {
   const router = useRouter();
   const { blog } = router.query;
 
-  const myBlog = blogs.find(
-    (item) => item.title.toLowerCase().replaceAll(" ", "-") === blog
-  );
+  const markdownIt = new MarkdownIt();
+  const content = markdownIt.render(myblog?.value);
 
   return (
     <div className={myFont.className}>
-      <Navbar />
-      <Banner title={myBlog?.title} image={myBlog?.image} />
+      <Navbar logo={logo} />
+      <Banner
+        title={blog.replaceAll("-", " ")}
+        image={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/industry_template_images/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/${myblog?.file_name}`}
+      />
       <FullContainer>
         <Container className="py-16">
           <div className="grid grid-cols-1 md:grid-cols-home gap-14 w-full">
             <div>
-              <p>
-                More off this less hello salamander lied porpoise much over
-                tightly circa horse taped so innocuously outside crud mightily
-                rigorous negative one inside gorilla and drew humbly shot
-                tortoise inside opaquely. Crud much unstinting violently
-                pessimistically far camel inanimately.
-              </p>
-              <p className="mt-4">
-                Coquettish darn pernicious foresaw therefore much amongst
-                lingeringly shed much due antagonistically alongside so then
-                more and about turgid wrote so stunningly this that much slew.
-              </p>
-              <p className="mt-4">
-                More off this less hello salamander lied porpoise much over
-                tightly circa horse taped so innocuously outside crud mightily
-                rigorous negative one inside gorilla and drew humbly shot
-                tortoise inside opaquely. Crud much unstinting violently
-                pessimistically far camel inanimately then more and about.
-              </p>
-              <p>
-                More off this less hello salamander lied porpoise much over
-                tightly circa horse taped so innocuously outside crud mightily
-                rigorous negative one inside gorilla and drew humbly shot
-                tortoise inside opaquely. Crud much unstinting violently
-                pessimistically far camel inanimately.
-              </p>
-              <p className="mt-4">
-                Coquettish darn pernicious foresaw therefore much amongst
-                lingeringly shed much due antagonistically alongside so then
-                more and about turgid wrote so stunningly this that much slew.
-              </p>
-              <p className="mt-4">
-                More off this less hello salamander lied porpoise much over
-                tightly circa horse taped so innocuously outside crud mightily
-                rigorous negative one inside gorilla and drew humbly shot
-                tortoise inside opaquely. Crud much unstinting violently
-                pessimistically far camel inanimately then more and about.
-              </p>
-              <p>
-                More off this less hello salamander lied porpoise much over
-                tightly circa horse taped so innocuously outside crud mightily
-                rigorous negative one inside gorilla and drew humbly shot
-                tortoise inside opaquely. Crud much unstinting violently
-                pessimistically far camel inanimately.
-              </p>
-              <p className="mt-4">
-                Coquettish darn pernicious foresaw therefore much amongst
-                lingeringly shed much due antagonistically alongside so then
-                more and about turgid wrote so stunningly this that much slew.
-              </p>
-              <p className="mt-4">
-                More off this less hello salamander lied porpoise much over
-                tightly circa horse taped so innocuously outside crud mightily
-                rigorous negative one inside gorilla and drew humbly shot
-                tortoise inside opaquely. Crud much unstinting violently
-                pessimistically far camel inanimately then more and about.
-              </p>
-              <p>
-                More off this less hello salamander lied porpoise much over
-                tightly circa horse taped so innocuously outside crud mightily
-                rigorous negative one inside gorilla and drew humbly shot
-                tortoise inside opaquely. Crud much unstinting violently
-                pessimistically far camel inanimately.
-              </p>
-              <p className="mt-4">
-                Coquettish darn pernicious foresaw therefore much amongst
-                lingeringly shed much due antagonistically alongside so then
-                more and about turgid wrote so stunningly this that much slew.
-              </p>
-              <p className="mt-4">
-                More off this less hello salamander lied porpoise much over
-                tightly circa horse taped so innocuously outside crud mightily
-                rigorous negative one inside gorilla and drew humbly shot
-                tortoise inside opaquely. Crud much unstinting violently
-                pessimistically far camel inanimately then more and about.
-              </p>
+              <div
+                className="markdown-content"
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
             </div>
             <Rightbar />
           </div>
@@ -113,4 +44,50 @@ export default function Blog() {
       <Footer />
     </div>
   );
+}
+
+export async function getServerSideProps({ params, res }) {
+  const _blog = await fetch(
+    `${
+      process.env.NEXT_PUBLIC_SITE_MANAGER
+    }/api/public/industry_template_data/${
+      process.env.NEXT_PUBLIC_INDUSTRY_ID
+    }/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/data/${params.blog.replaceAll(
+      "-",
+      "_"
+    )}`
+  );
+  const blog = await _blog.json();
+
+  const _blog_list = await fetch(
+    `${
+      process.env.NEXT_PUBLIC_SITE_MANAGER
+    }/api/public/industry_template_data/${
+      process.env.NEXT_PUBLIC_INDUSTRY_ID
+    }/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/data/${"blog_list"}`
+  );
+  const blog_list = await _blog_list.json();
+
+  const isValidBlog = blog_list.data[0].value.some(
+    (item) => item.title.replaceAll(" ", "-") === params.blog
+  );
+
+  if (!isValidBlog) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const _logo = await fetch(
+    `${
+      process.env.NEXT_PUBLIC_SITE_MANAGER
+    }/api/public/industry_template_data/${
+      process.env.NEXT_PUBLIC_INDUSTRY_ID
+    }/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/data/${"logo"}`
+  );
+  const logo = await _logo.json();
+
+  return {
+    props: { logo: logo.data[0], myblog: blog.data[0] },
+  };
 }

@@ -12,17 +12,13 @@ import { Montserrat } from "next/font/google";
 
 const myFont = Montserrat({ subsets: ["cyrillic"] });
 
-export default function Home() {
+export default function Blogs({ logo }) {
   return (
     <div className={myFont.className}>
       <Head>
         <title>Next 14 Template</title>
       </Head>
-      <Navbar />
-      {/* <Banner
-        title="New Fashion Trends"
-        image="https://zoya.qodeinteractive.com/wp-content/uploads/2021/01/blog-list-img-5.jpg"
-      /> */}
+      <Navbar logo={logo} />
       <FullContainer>
         <Container className="py-16">
           <div className="grid grid-cols-1 md:grid-cols-home gap-14 w-full">
@@ -39,4 +35,21 @@ export default function Home() {
       <Footer />
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const _logo = await fetch(
+    `${
+      process.env.NEXT_PUBLIC_SITE_MANAGER
+    }/api/public/industry_template_data/${
+      process.env.NEXT_PUBLIC_INDUSTRY_ID
+    }/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/data/${"logo"}`
+  );
+  const logo = await _logo.json();
+
+  return {
+    props: {
+      logo: logo.data[0],
+    },
+  };
 }
