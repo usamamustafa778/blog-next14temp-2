@@ -64,6 +64,7 @@ function BlogCard({ title, image }) {
           priority={true}
           fill={true}
           loading="eager"
+          sizes="400px, 300px"
           className="-z-10 w-full h-full object-cover absolute top-0"
         />
       </div>

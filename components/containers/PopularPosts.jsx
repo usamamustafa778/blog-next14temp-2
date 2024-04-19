@@ -27,10 +27,11 @@ function Blog({ image, title }) {
       <div className="relative overflow-hidden w-2/6 h-20">
         <Image
           src={image}
-          alt="Background Image"
-          priority={true}
           fill={true}
           loading="eager"
+          priority={true}
+          sizes="200px, 150px"
+          alt="Background Image"
           className="w-full h-full object-cover absolute top-0"
         />
       </div>

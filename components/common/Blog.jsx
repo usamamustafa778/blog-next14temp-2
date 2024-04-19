@@ -14,10 +14,12 @@ export default function Blog({ title, image, className }) {
       <div className="relative overflow-hidden w-full h-[60vh] mt-8">
         <Image
           src={image}
-          alt="Background Image"
-          priority={true}
           fill={true}
-          loading="eager"
+          quality={80}
+          loading="lazy"
+          priority={false}
+          alt="Background Image"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="-z-10 w-full h-full object-cover absolute top-0"
         />
       </div>

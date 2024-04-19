@@ -12,7 +12,13 @@ import { Montserrat } from "next/font/google";
 
 const myFont = Montserrat({ subsets: ["cyrillic"] });
 
-export default function Home() {
+export default function Home({ logo }) {
+  // http://localhost:3112/images/industry_template_images/65f031b9d1d7559cda393629/1710763764370-kpqe5g.jpeg
+  // setBannerImage(
+  //   `https://apisitem.ecommcube.com/images/industry_template_images/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/${file}`
+  // );
+  console.log(logo);
+
   return (
     <div className={myFont.className}>
       <Head>
@@ -39,4 +45,33 @@ export default function Home() {
       <Footer />
     </div>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const _logo = await fetch(
+      `${process.env.NEXT_PUBLIC_SITE_MANAGER}/public/industry_template_data/${
+        process.env.NEXT_PUBLIC_INDUSTRY_ID
+      }/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/data/${"Banner"}`
+    );
+
+    if (!_logo.ok) {
+      throw new Error(`Failed to fetch logo: ${_logo.statusText}`);
+    }
+
+    const logo = await _logo.json();
+
+    return {
+      props: {
+        logo,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching logo:", error);
+    return {
+      props: {
+        logo: null,
+      },
+    };
+  }
 }

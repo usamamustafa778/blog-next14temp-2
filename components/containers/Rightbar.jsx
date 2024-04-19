@@ -10,12 +10,14 @@ export default function Rightbar() {
       <div className="relative cursor-pointer hover:opacity-90 transition-all">
         <div className="relative overflow-hidden w-full h-96">
           <Image
-            src="https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2016/05/shutterstock_437021746-1024x683.jpg"
-            alt="Background Image"
-            priority={true}
             fill={true}
-            loading="eager"
+            quality={80}
+            loading="lazy"
+            priority={false}
+            sizes="400px, 300px"
+            alt="Background Image"
             className="-z-10 w-full h-full object-cover absolute top-0"
+            src="https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2016/05/shutterstock_437021746-1024x683.jpg"
           />
         </div>
         <div className="bg-black/50 flex flex-col items-center gap-3 text-white text-center p-3 absolute bottom-0">
@@ -30,12 +32,14 @@ export default function Rightbar() {
         <h2 className="bg-white px-5 font-bold text-lg -mt-9">About</h2>
         <div className="relative overflow-hidden w-full h-40 mt-8">
           <Image
-            src="https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2017/07/about-side.jpg"
-            alt="Background Image"
-            priority={true}
             fill={true}
-            loading="eager"
+            quality={80}
+            loading="lazy"
+            priority={false}
+            sizes="400px, 300px"
+            alt="Background Image"
             className="-z-10 w-full h-full object-cover absolute top-0"
+            src="https://cheerup2.theme-sphere.com/bold/wp-content/uploads/sites/8/2017/07/about-side.jpg"
           />
         </div>
         <p className="mt-3 text-sm">
