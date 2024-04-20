@@ -1,6 +1,5 @@
 import Container from "@/components/common/Container";
 import FullContainer from "@/components/common/FullContainer";
-import Banner from "@/components/containers/Banner";
 import MostPopular from "@/components/containers/MostPopular";
 import Navbar from "@/components/containers/Navbar";
 import Footer from "@/components/containers/Footer";

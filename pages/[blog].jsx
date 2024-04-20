@@ -1,31 +1,29 @@
 import React from "react";
-import { blogs } from "@/components/blogs";
-import Container from "@/components/common/Container";
 import FullContainer from "@/components/common/FullContainer";
-import Banner from "@/components/containers/Banner";
 import MostPopular from "@/components/containers/MostPopular";
-import Navbar from "@/components/containers/Navbar";
 import Rightbar from "@/components/containers/Rightbar";
-import { useRouter } from "next/router";
-import { Montserrat } from "next/font/google";
+import Container from "@/components/common/Container";
+import Banner from "@/components/containers/Banner";
+import Navbar from "@/components/containers/Navbar";
 import Footer from "@/components/containers/Footer";
+import { Montserrat } from "next/font/google";
 import MarkdownIt from "markdown-it";
 
 const myFont = Montserrat({ subsets: ["cyrillic"] });
 
 export default function Blog({ logo, myblog }) {
-  const router = useRouter();
-  const { blog } = router.query;
-
   const markdownIt = new MarkdownIt();
-  const content = markdownIt.render(myblog?.value);
+  const content = markdownIt.render(myblog?.value.articleContent);
 
   return (
     <div className={myFont.className}>
       <Navbar logo={logo} />
       <Banner
-        title={blog.replaceAll("-", " ")}
+        title={myblog?.value.title}
+        tagline={myblog?.value.tagline}
         image={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/industry_template_images/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/${myblog?.file_name}`}
+        author={myblog?.value.author}
+        published_at={myblog?.value.published_at}
       />
       <FullContainer>
         <Container className="py-16">
@@ -69,7 +67,7 @@ export async function getServerSideProps({ params, res }) {
   const blog_list = await _blog_list.json();
 
   const isValidBlog = blog_list.data[0].value.some(
-    (item) => item.title.replaceAll(" ", "-") === params.blog
+    (item) => item.title.toLowerCase().replaceAll(" ", "-") === params.blog
   );
 
   if (!isValidBlog) {

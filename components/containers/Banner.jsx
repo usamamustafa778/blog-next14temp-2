@@ -8,7 +8,14 @@ import { Cormorant } from "next/font/google";
 
 const myFont = Cormorant({ subsets: ["cyrillic"] });
 
-export default function Banner({ title, image, badge, tagline }) {
+export default function Banner({
+  title,
+  image,
+  badge,
+  tagline,
+  author,
+  published_at,
+}) {
   return (
     <FullContainer className="h-[60vh] overflow-hidden p-10 bg-black/20 text-white text-center">
       <Image
@@ -29,9 +36,10 @@ export default function Banner({ title, image, badge, tagline }) {
         >
           {title}
         </h1>
-        {tagline && (
-          <div className="flex items-center justify-center gap-2">
-            <p>{tagline}</p>
+        {tagline && <p className="text-xl">{tagline}</p>}
+        {author && (
+          <div className="flex items-center justify-center gap-4">
+            <p>{author}</p> -<p>{published_at}</p>
           </div>
         )}
       </Container>
