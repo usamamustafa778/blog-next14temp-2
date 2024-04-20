@@ -8,6 +8,7 @@ import Navbar from "@/components/containers/Navbar";
 import Footer from "@/components/containers/Footer";
 import { Montserrat } from "next/font/google";
 import MarkdownIt from "markdown-it";
+import Head from "next/head";
 
 const myFont = Montserrat({ subsets: ["cyrillic"] });
 
@@ -17,6 +18,9 @@ export default function Blog({ logo, myblog }) {
 
   return (
     <div className={myFont.className}>
+      <Head>
+        <title>{myblog?.value.title} | Next 14 Template</title>
+      </Head>
       <Navbar logo={logo} />
       <Banner
         title={myblog?.value.title}
