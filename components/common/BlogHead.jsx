@@ -4,7 +4,7 @@ import { Cormorant } from "next/font/google";
 
 const myFont = Cormorant({ subsets: ["cyrillic"] });
 
-export default function BlogHead({ title }) {
+export default function BlogHead({ title, date, author }) {
   return (
     <div className="flex flex-col items-center gap-4 text-center">
       <p className="italic text-xs w-fit text-gray-400">
@@ -15,7 +15,8 @@ export default function BlogHead({ title }) {
       </p>
       <h2 className={cn("font-bold text-5xl", myFont.className)}>{title}</h2>
       <p className="text-xs uppercase">
-        <span className="text-gray-400 text-xs">MAY 15, 2016</span> - 3 COMMENTS
+        By <span className="text-xs underline">{author}</span> -
+        <span className="text-gray-500 text-xs"> {date}</span>
       </p>
     </div>
   );

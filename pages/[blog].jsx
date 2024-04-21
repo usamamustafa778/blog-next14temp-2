@@ -1,6 +1,5 @@
 import React from "react";
 import FullContainer from "@/components/common/FullContainer";
-import MostPopular from "@/components/containers/MostPopular";
 import Rightbar from "@/components/containers/Rightbar";
 import Container from "@/components/common/Container";
 import Banner from "@/components/containers/Banner";
@@ -9,10 +8,11 @@ import Footer from "@/components/containers/Footer";
 import { Montserrat } from "next/font/google";
 import MarkdownIt from "markdown-it";
 import Head from "next/head";
+import LatestBlogs from "@/components/containers/LatestBlogs";
 
 const myFont = Montserrat({ subsets: ["cyrillic"] });
 
-export default function Blog({ logo, myblog }) {
+export default function Blog({ logo, myblog, blog_list }) {
   const markdownIt = new MarkdownIt();
   const content = markdownIt.render(myblog?.value.articleContent);
 
@@ -42,7 +42,7 @@ export default function Blog({ logo, myblog }) {
           </div>
         </Container>
       </FullContainer>
-      <MostPopular />
+      <LatestBlogs blogs={blog_list} />
       <Footer />
     </div>
   );
@@ -90,6 +90,10 @@ export async function getServerSideProps({ params, res }) {
   const logo = await _logo.json();
 
   return {
-    props: { logo: logo.data[0], myblog: blog.data[0] },
+    props: {
+      logo: logo.data[0],
+      myblog: blog.data[0],
+      blog_list: blog_list.data[0].value,
+    },
   };
 }

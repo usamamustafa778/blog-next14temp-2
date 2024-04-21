@@ -26,7 +26,11 @@ export default function Navbar({ logo }) {
         <div className="flex items-center justify-between w-10/12 py-10">
           <div className="flex items-center gap-3 uppercase">
             <Search className="w-5" />
-            <p>Search</p>
+            <input
+              type="text"
+              className="focus:border-b outline-none placeholder:text-gray-700 mt-1"
+              placeholder="SEARCH.."
+            />
           </div>
           <Link href="/">
             <Image
