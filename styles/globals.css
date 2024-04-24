@@ -103,7 +103,7 @@
 
 /* Paragraphs */
 .markdown-content p {
-  margin: 0.6em 0;
+  margin: 0.3em 0;
 }
 
 /* Links */
@@ -212,4 +212,9 @@
 .markdown-content th,
 .markdown-content td {
   font-weight: normal;
+}
+
+.about_me h1 {
+  font-size: 50px;
+  margin-bottom: 0;
 }
