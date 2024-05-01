@@ -23,8 +23,8 @@ export default function Navbar({ logo }) {
       </div>
 
       <FullContainer className="bg-white shadow-sm">
-        <div className="flex items-center justify-between w-10/12 py-10">
-          <div className="flex items-center gap-3 uppercase">
+        <div className="flex items-center justify-between w-10/12 py-3 md:py-6 lg:py-10">
+          <div className="hidden lg:flex items-center gap-3 uppercase">
             <Search className="w-5" />
             <input
               type="text"
@@ -38,10 +38,10 @@ export default function Navbar({ logo }) {
               width={170}
               src={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/industry_template_images/${process.env.NEXT_PUBLIC_TEMPLATE_ID}/${logo.file_name}`}
               alt="logo"
-              className="w-40 md:w-72"
+              className="w-28 md:w-72"
             />
           </Link>
-          <div className="flex items-center justify-end gap-3 text-gray-500">
+          <div className="flex items-center justify-end gap-3 text-gray-400">
             <Facebook className="w-5" />
             <Twitter className="w-5" />
             <Instagram className="w-5" />
